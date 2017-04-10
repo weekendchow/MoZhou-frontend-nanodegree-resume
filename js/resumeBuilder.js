@@ -12,10 +12,9 @@ var bio = {
         "blog": "weekendchow.github.io",
         "location": "Ottawa, Ontario, Canada"
     },
-    "pictureURL": "images/me.jpg",
-    "welcomeMsg": "Hello to my world!",
-    "skills": ["JS", "HTML", "CSS", "JAVA", "MATLAB"],
-    "display": null
+    "biopic": "images/me.jpg",
+    "welcomeMessage": "Hello to my world!",
+    "skills": ["JS", "HTML", "CSS", "JAVA", "MATLAB"]
 };
 
 var work = {
@@ -33,8 +32,7 @@ var work = {
             "location": "Xi'an, Shanxi, China",
             "description": "Working as an Assistant at Technical Dept."
         }
-    ],
-    "display": null
+    ]
 };
 
 var education = {
@@ -42,33 +40,32 @@ var education = {
             "name": "University of Ottawa",
             "location": "Ottawa, Ontario, Canada",
             "degree": "Masters",
-            "major": "Electrical and Computer Engineering",
+            "majors": ["Electrical and Computer Engineering"],
             "dates": "2014 - 2016",
-            "link": "https://www.uottawa.ca/"
+            "url": "https://www.uottawa.ca/"
         },
         {
             "name": "Shenzhen University",
             "location": "Shenzhen, Guangdong, China",
             "degree": "Bachelor",
-            "major": "Optoelectronic Information Engineering",
+            "majors": ["Optoelectronic Information Engineering"],
             "dates": "2010 - 2014",
-            "link": "http://www.szu.edu.cn/2014/"
+            "url": "http://www.szu.edu.cn/2014/"
         }
     ],
     "onlineCourses": [{
             "title": "Front-End Web Developer Nanodegree",
             "school": "Udacity",
-            "dates": 2017,
-            "link": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
+            "dates": "2017",
+            "url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
         },
         {
             "title": "Java",
             "school": "Tarena",
-            "dates": 2016,
-            "link": "http://java.tedu.cn/"
+            "dates": "2016",
+            "url": "http://java.tedu.cn/"
         }
-    ],
-    "display": null
+    ]
 };
 
 var projects = {
@@ -93,8 +90,7 @@ var projects = {
             "link": "https://github.com/weekendchow/Dynamic-Simulation-with-Particles-in-Chai3D",
             "images": ["images/p3.jpg"]
         }
-    ],
-    "display": null
+    ]
 };
 
 bio.display = function() {
@@ -104,17 +100,21 @@ bio.display = function() {
     $("#header").append(formattedName);
     $("#header").append(formattedRole);
 
-    var formattedBioPic = HTMLbioPic.replace("%data%", bio.pictureURL);
-    var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMsg);
+    var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
+    var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
 
     $("#header").append(formattedBioPic);
     $("#header").append(formattedWelcomeMsg);
+
+    displayContactInfo();
+    displaySkills();
 };
 
 bio.display();
 
 function displayContactInfo() {
     var formattedContactInfo = [];
+    formattedContactInfo.push(HTMLmobile.replace("%data%", bio.contacts.mobile));
     formattedContactInfo.push(HTMLemail.replace("%data%", bio.contacts.email));
     formattedContactInfo.push(HTMLgithub.replace("%data%", bio.contacts.github));
     formattedContactInfo.push(HTMLtwitter.replace("%data%", bio.contacts.twitter));
@@ -126,7 +126,6 @@ function displayContactInfo() {
         $("#footerContacts").append(formattedContactInfo[i]);
     }
 }
-displayContactInfo();
 
 
 function displaySkills() {
@@ -140,9 +139,9 @@ function displaySkills() {
         }
     }
 }
-displaySkills();
 
-function displayWork() {
+
+work.display = function () {
     if (work.jobs.length > 0) {
 
         $("#workExperience").append(HTMLworkStart);
@@ -164,7 +163,9 @@ function displayWork() {
 
     }
 }
-displayWork();
+
+work.display();
+
 
 projects.display = function() {
     if (projects.projects.length > 0) {
@@ -196,11 +197,11 @@ education.display = function() {
         for (var i = 0; i < education.schools.length; i++) {
             $("#education").append(HTMLschoolStart);
 
-            var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[i].name).replace("#", education.schools[i].link);
+            var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[i].name).replace("#", education.schools[i].url);
             var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[i].degree);
             var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[i].dates);
             var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[i].location);
-            var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[i].major);
+            var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[i].majors);
 
             $(".education-entry:last").append(formattedSchoolName + formattedSchoolDegree);
             $(".education-entry:last").append(formattedSchoolDates);
@@ -212,10 +213,10 @@ education.display = function() {
             $("#education").append(HTMLonlineClasses);
             for (var j = 0; j < education.onlineCourses.length; j++) {
                 $("#education").append(HTMLschoolStart);
-                var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[j].title).replace("#", education.onlineCourses[j].link);
+                var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[j].title).replace("#", education.onlineCourses[j].url);
                 var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[j].school);
                 var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[j].dates);
-                var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[j].link).replace("#", education.onlineCourses[j].link);
+                var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[j].url).replace("#", education.onlineCourses[j].url);
 
                 $(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool);
                 $(".education-entry:last").append(formattedOnlineDates);
