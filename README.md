@@ -85,7 +85,6 @@ Clone or download this repo and open the index.html file. Or open it [live](http
 
 1. [Google Maps API Doc](https://developers.google.com/maps/documentation/)
 2. [jQuery API Doc](http://api.jquery.com/)
-3. [jshint](http://jshint.com/)
 
 
 ## License
